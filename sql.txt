@@ -1,0 +1,146 @@
+-- Members 表
+CREATE TABLE Members (
+    MemberID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Address VARCHAR(255),
+    Phone VARCHAR(15),
+    Email VARCHAR(100),
+    DateOfBirth DATE
+);
+
+-- MembershipTypes 表
+CREATE TABLE MembershipTypes (
+    TypeID SERIAL PRIMARY KEY,
+    TypeName VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Duration INT,
+    Price DECIMAL(10, 2)
+);
+
+-- MemberSubscriptions 表
+CREATE TABLE MemberSubscriptions (
+    SubscriptionID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    TypeID INT NOT NULL,
+    StartDate DATE,
+    EndDate DATE,
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID),
+    FOREIGN KEY (TypeID) REFERENCES MembershipTypes (TypeID)
+);
+
+-- Trainers 表
+CREATE TABLE Trainers (
+    TrainerID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Qualifications TEXT,
+    Specialization VARCHAR(100)
+);
+
+-- FitnessClasses 表
+CREATE TABLE FitnessClasses (
+    ClassID SERIAL PRIMARY KEY,
+    ClassName VARCHAR(100) NOT NULL,
+    TrainerID INT NOT NULL,
+    Schedule TEXT,
+    Duration INT,
+    FOREIGN KEY (TrainerID) REFERENCES Trainers (TrainerID)
+);
+
+-- ClassRegistrations 表
+CREATE TABLE ClassRegistrations (
+    RegistrationID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    ClassID INT NOT NULL,
+    RegistrationDate DATE,
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID),
+    FOREIGN KEY (ClassID) REFERENCES FitnessClasses (ClassID)
+);
+
+-- PersonalTrainingSessions 表
+CREATE TABLE PersonalTrainingSessions (
+    SessionID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    TrainerID INT NOT NULL,
+    Date DATE,
+    Time TIME,
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID),
+    FOREIGN KEY (TrainerID) REFERENCES Trainers (TrainerID)
+);
+
+-- HealthMetrics 表
+CREATE TABLE HealthMetrics (
+    MetricID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    Date DATE,
+    Weight DECIMAL(5, 2),
+    BMI DECIMAL(5, 2),
+    OtherMetrics TEXT,
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
+);
+
+-- FitnessGoals 表
+CREATE TABLE FitnessGoals (
+    GoalID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    Description TEXT,
+    TargetDate DATE,
+    Status VARCHAR(50),
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
+);
+
+-- Equipment 表
+CREATE TABLE Equipment (
+    EquipmentID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Type VARCHAR(50),
+    PurchaseDate DATE,
+    MaintenanceSchedule TEXT
+);
+
+-- EquipmentUsage 表
+CREATE TABLE EquipmentUsage (
+    UsageID SERIAL PRIMARY KEY,
+    EquipmentID INT NOT NULL,
+    MemberID INT NOT NULL,
+    UsageDate DATE,
+    Duration INT,
+    FOREIGN KEY (EquipmentID) REFERENCES Equipment (EquipmentID),
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
+);
+
+-- Payments 表
+CREATE TABLE Payments (
+    PaymentID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    Amount DECIMAL(10, 2),
+    PaymentDate DATE,
+    PaymentMethod VARCHAR(50),
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
+);
+
+-- LoyaltyPoints 表
+CREATE TABLE LoyaltyPoints (
+    PointID SERIAL PRIMARY KEY,
+    MemberID INT NOT NULL,
+    PointsEarned INT,
+    PointsRedeemed INT,
+    Date DATE,
+    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
+);
+
+-- Staff 表
+CREATE TABLE Staff (
+    StaffID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Position VARCHAR(100),
+    ContactInfo VARCHAR(255)
+);
+
+-- RoomBookings 表
+CREATE TABLE RoomBookings (
+    BookingID SERIAL PRIMARY KEY,
+    RoomID VARCHAR(50),
+    BookingDate DATE,
+    StartTime TIME,
+    EndTime TIME
+);
