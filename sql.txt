@@ -1,146 +1,110 @@
--- Members 表
 CREATE TABLE Members (
-    MemberID SERIAL PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Address VARCHAR(255),
-    Phone VARCHAR(15),
-    Email VARCHAR(100),
-    DateOfBirth DATE
+    MemberID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    DateOfBirth DATE,
+    Gender VARCHAR(50),
+    ContactInfo VARCHAR(255),
+    HealthMetrics VARCHAR(255),
+    FitnessGoals VARCHAR(255)
 );
-
--- MembershipTypes 表
-CREATE TABLE MembershipTypes (
-    TypeID SERIAL PRIMARY KEY,
-    TypeName VARCHAR(100) NOT NULL,
-    Description TEXT,
-    Duration INT,
-    Price DECIMAL(10, 2)
-);
-
--- MemberSubscriptions 表
-CREATE TABLE MemberSubscriptions (
-    SubscriptionID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    TypeID INT NOT NULL,
-    StartDate DATE,
-    EndDate DATE,
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID),
-    FOREIGN KEY (TypeID) REFERENCES MembershipTypes (TypeID)
-);
-
--- Trainers 表
 CREATE TABLE Trainers (
-    TrainerID SERIAL PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Qualifications TEXT,
-    Specialization VARCHAR(100)
+    TrainerID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Qualifications VARCHAR(255)
 );
-
--- FitnessClasses 表
-CREATE TABLE FitnessClasses (
-    ClassID SERIAL PRIMARY KEY,
-    ClassName VARCHAR(100) NOT NULL,
-    TrainerID INT NOT NULL,
-    Schedule TEXT,
-    Duration INT,
-    FOREIGN KEY (TrainerID) REFERENCES Trainers (TrainerID)
-);
-
--- ClassRegistrations 表
-CREATE TABLE ClassRegistrations (
-    RegistrationID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    ClassID INT NOT NULL,
-    RegistrationDate DATE,
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID),
-    FOREIGN KEY (ClassID) REFERENCES FitnessClasses (ClassID)
-);
-
--- PersonalTrainingSessions 表
-CREATE TABLE PersonalTrainingSessions (
-    SessionID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    TrainerID INT NOT NULL,
-    Date DATE,
-    Time TIME,
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID),
-    FOREIGN KEY (TrainerID) REFERENCES Trainers (TrainerID)
-);
-
--- HealthMetrics 表
-CREATE TABLE HealthMetrics (
-    MetricID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    Date DATE,
-    Weight DECIMAL(5, 2),
-    BMI DECIMAL(5, 2),
-    OtherMetrics TEXT,
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-);
-
--- FitnessGoals 表
-CREATE TABLE FitnessGoals (
-    GoalID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    Description TEXT,
-    TargetDate DATE,
-    Status VARCHAR(50),
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-);
-
--- Equipment 表
-CREATE TABLE Equipment (
-    EquipmentID SERIAL PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Type VARCHAR(50),
-    PurchaseDate DATE,
-    MaintenanceSchedule TEXT
-);
-
--- EquipmentUsage 表
-CREATE TABLE EquipmentUsage (
-    UsageID SERIAL PRIMARY KEY,
-    EquipmentID INT NOT NULL,
-    MemberID INT NOT NULL,
-    UsageDate DATE,
-    Duration INT,
-    FOREIGN KEY (EquipmentID) REFERENCES Equipment (EquipmentID),
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-);
-
--- Payments 表
-CREATE TABLE Payments (
-    PaymentID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    Amount DECIMAL(10, 2),
-    PaymentDate DATE,
-    PaymentMethod VARCHAR(50),
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-);
-
--- LoyaltyPoints 表
-CREATE TABLE LoyaltyPoints (
-    PointID SERIAL PRIMARY KEY,
-    MemberID INT NOT NULL,
-    PointsEarned INT,
-    PointsRedeemed INT,
-    Date DATE,
-    FOREIGN KEY (MemberID) REFERENCES Members (MemberID)
-);
-
--- Staff 表
 CREATE TABLE Staff (
-    StaffID SERIAL PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
-    Position VARCHAR(100),
+    StaffID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Role VARCHAR(100),
     ContactInfo VARCHAR(255)
 );
-
--- RoomBookings 表
-CREATE TABLE RoomBookings (
-    BookingID SERIAL PRIMARY KEY,
-    RoomID VARCHAR(50),
-    BookingDate DATE,
-    StartTime TIME,
-    EndTime TIME
+CREATE TABLE GroupClasses (
+    ClassID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    TrainerID INT,
+    RoomID INT,
+    Schedule TEXT,
+    MaxCapacity INT,
+    FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
 );
+CREATE TABLE Equipment (
+    EquipmentID INT PRIMARY KEY,
+    Type VARCHAR(100),
+    Status VARCHAR(50),
+    LastMaintenanceDate DATE
+);
+CREATE TABLE Room (
+    RoomID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Capacity INT,
+    Type VARCHAR(100)
+);
+CREATE TABLE Event (
+    EventID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Description TEXT,
+    DateTime DATETIME,
+    Location VARCHAR(255)
+);
+CREATE TABLE MemberClassParticipation (
+    MemberID INT,
+    ClassID INT,
+    DateJoined DATE,
+    PRIMARY KEY (MemberID, ClassID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY (ClassID) REFERENCES GroupClasses(ClassID)
+);
+CREATE TABLE Billing (
+    BillID INT PRIMARY KEY,
+    MemberID INT,
+    Amount DECIMAL(10, 2),
+    Date DATE,
+    PaymentMethod VARCHAR(100),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
+CREATE TABLE LoyaltyPoints (
+    MemberID INT PRIMARY KEY,
+    PointsEarned INT,
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
+CREATE TABLE ProgressNotes (
+    NoteID INT PRIMARY KEY,
+    ClassID INT,
+    TrainerID INT,
+    Content TEXT,
+    Date DATE,
+    FOREIGN KEY (ClassID) REFERENCES GroupClasses(ClassID),
+    FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID)
+);
+CREATE TABLE Feedback (
+    FeedbackID INT PRIMARY KEY,
+    MemberID INT,
+    ClassID INT,
+    Content TEXT,
+    Date DATE,
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY (ClassID) REFERENCES GroupClasses(ClassID)
+);
+CREATE TABLE Notifications (
+    NotificationID INT PRIMARY KEY,
+    MemberID INT,
+    Content TEXT,
+    DateSent DATE,
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
+CREATE TABLE MemberEventParticipation (
+    MemberID INT,
+    EventID INT,
+    DateJoined DATE,
+    PRIMARY KEY (MemberID, EventID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+);
+CREATE TABLE TrainerEventParticipation (
+    TrainerID INT,
+    EventID INT,
+    DateJoined DATE,
+    PRIMARY KEY (TrainerID, EventID),
+    FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
+    FOREIGN KEY (EventID
