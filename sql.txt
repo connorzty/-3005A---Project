@@ -1,5 +1,5 @@
 CREATE TABLE Members (
-    MemberID INT PRIMARY KEY,
+    MemberID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     DateOfBirth DATE,
     Gender VARCHAR(50),
@@ -8,18 +8,24 @@ CREATE TABLE Members (
     FitnessGoals VARCHAR(255)
 );
 CREATE TABLE Trainers (
-    TrainerID INT PRIMARY KEY,
+    TrainerID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Qualifications VARCHAR(255)
 );
 CREATE TABLE Staff (
-    StaffID INT PRIMARY KEY,
+    StaffID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Role VARCHAR(100),
     ContactInfo VARCHAR(255)
 );
+CREATE TABLE Room (
+    RoomID SERIAL PRIMARY KEY,
+    Name VARCHAR(255),
+    Capacity INT,
+    Type VARCHAR(100)
+);
 CREATE TABLE GroupClasses (
-    ClassID INT PRIMARY KEY,
+    ClassID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     TrainerID INT,
     RoomID INT,
@@ -29,22 +35,17 @@ CREATE TABLE GroupClasses (
     FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
 );
 CREATE TABLE Equipment (
-    EquipmentID INT PRIMARY KEY,
+    EquipmentID SERIAL PRIMARY KEY,
     Type VARCHAR(100),
     Status VARCHAR(50),
     LastMaintenanceDate DATE
 );
-CREATE TABLE Room (
-    RoomID INT PRIMARY KEY,
-    Name VARCHAR(255),
-    Capacity INT,
-    Type VARCHAR(100)
-);
+
 CREATE TABLE Event (
-    EventID INT PRIMARY KEY,
+    EventID SERIAL PRIMARY KEY,
     Name VARCHAR(255),
     Description TEXT,
-    DateTime DATETIME,
+    DateTime TIMESTAMP,
     Location VARCHAR(255)
 );
 CREATE TABLE MemberClassParticipation (
@@ -56,7 +57,7 @@ CREATE TABLE MemberClassParticipation (
     FOREIGN KEY (ClassID) REFERENCES GroupClasses(ClassID)
 );
 CREATE TABLE Billing (
-    BillID INT PRIMARY KEY,
+    BillID SERIAL PRIMARY KEY,
     MemberID INT,
     Amount DECIMAL(10, 2),
     Date DATE,
@@ -69,7 +70,7 @@ CREATE TABLE LoyaltyPoints (
     FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
 );
 CREATE TABLE ProgressNotes (
-    NoteID INT PRIMARY KEY,
+    NoteID SERIAL PRIMARY KEY,
     ClassID INT,
     TrainerID INT,
     Content TEXT,
@@ -78,7 +79,7 @@ CREATE TABLE ProgressNotes (
     FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID)
 );
 CREATE TABLE Feedback (
-    FeedbackID INT PRIMARY KEY,
+    FeedbackID SERIAL PRIMARY KEY,
     MemberID INT,
     ClassID INT,
     Content TEXT,
@@ -87,7 +88,7 @@ CREATE TABLE Feedback (
     FOREIGN KEY (ClassID) REFERENCES GroupClasses(ClassID)
 );
 CREATE TABLE Notifications (
-    NotificationID INT PRIMARY KEY,
+    NotificationID SERIAL PRIMARY KEY,
     MemberID INT,
     Content TEXT,
     DateSent DATE,
@@ -109,3 +110,4 @@ CREATE TABLE TrainerEventParticipation (
     FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
     FOREIGN KEY (EventID) REFERENCES Event(EventID)
 );
+
