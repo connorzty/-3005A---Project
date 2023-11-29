@@ -107,4 +107,5 @@ CREATE TABLE TrainerEventParticipation (
     DateJoined DATE,
     PRIMARY KEY (TrainerID, EventID),
     FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
-    FOREIGN KEY (EventID
+    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+);
