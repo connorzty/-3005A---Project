@@ -19,7 +19,6 @@ public class GymManagementSystem {
 
     public GymManagementSystem() {
         mainPanel = new JPanel();
-        mainPanel.setSize(400, 300);
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         textFieldName = new JTextField();
         textFieldDob = new JTextField();
@@ -94,6 +93,7 @@ public class GymManagementSystem {
         frame.setContentPane(new GymManagementSystem().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setSize(1200, 1000);
         frame.setVisible(true);
     }
 }
