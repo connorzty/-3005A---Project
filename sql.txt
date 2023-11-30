@@ -97,7 +97,6 @@ CREATE TABLE Notifications (
 CREATE TABLE MemberEventParticipation (
     MemberID INT,
     EventID INT,
-    DateJoined DATE,
     PRIMARY KEY (MemberID, EventID),
     FOREIGN KEY (MemberID) REFERENCES Members(MemberID),
     FOREIGN KEY (EventID) REFERENCES Event(EventID)
@@ -105,7 +104,6 @@ CREATE TABLE MemberEventParticipation (
 CREATE TABLE TrainerEventParticipation (
     TrainerID INT,
     EventID INT,
-    DateJoined DATE,
     PRIMARY KEY (TrainerID, EventID),
     FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
     FOREIGN KEY (EventID) REFERENCES Event(EventID)
