@@ -109,3 +109,15 @@ CREATE TABLE TrainerEventParticipation (
     FOREIGN KEY (EventID) REFERENCES Event(EventID)
 );
 
+ALTER TABLE Room
+ADD COLUMN IsAvailable BOOLEAN DEFAULT TRUE;
+
+CREATE TABLE OneToOneClasses (
+    ClassID SERIAL PRIMARY KEY,
+    TrainerID INT,
+    MemberID INT,
+    DateTime TIMESTAMP,
+    Description TEXT,
+    FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
