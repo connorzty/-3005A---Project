@@ -1,0 +1,84 @@
+INSERT INTO Members (Name, DateOfBirth, Gender, ContactInfo, HealthMetrics, FitnessGoals) VALUES
+('John Doe', '1985-07-12', 'Male', 'john.doe@email.com', 'Height: 180cm, Weight: 80kg', 'Lose weight'),
+('Jane Smith', '1990-11-23', 'Female', 'jane.smith@email.com', 'Height: 165cm, Weight: 60kg', 'Build muscle'),
+('Alice Johnson', '1995-05-17', 'Female', 'alice.johnson@email.com', 'Height: 170cm, Weight: 65kg', 'Improve flexibility'),
+('Bob Williams', '1988-09-04', 'Male', 'bob.williams@email.com', 'Height: 175cm, Weight: 75kg', 'Increase stamina'),
+('Carol Taylor', '1982-02-26', 'Female', 'carol.taylor@email.com', 'Height: 160cm, Weight: 55kg', 'Yoga and meditation'),
+('David Brown', '1975-12-11', 'Male', 'david.brown@email.com', 'Height: 185cm, Weight: 85kg', 'Bodybuilding'),
+('Eva Green', '1993-07-30', 'Female', 'eva.green@email.com', 'Height: 158cm, Weight: 50kg', 'General fitness'),
+('Frank Wright', '2000-01-15', 'Male', 'frank.wright@email.com', 'Height: 182cm, Weight: 77kg', 'Sports performance'),
+('Grace Hall', '1978-03-21', 'Female', 'grace.hall@email.com', 'Height: 168cm, Weight: 58kg', 'Weight loss'),
+('Henry Adams', '1983-06-09', 'Male', 'henry.adams@email.com', 'Height: 172cm, Weight: 70kg', 'Endurance training');
+
+
+INSERT INTO Trainers (Name, Qualifications) VALUES
+('Emma Wilson', 'Certified Personal Trainer'),
+('Liam Miller', 'Fitness Nutrition Specialist'),
+('Olivia Davis', 'Group Fitness Instructor'),
+('Noah Harris', 'Strength and Conditioning Coach'),
+('Ava Moore', 'Yoga Instructor'),
+('William Jackson', 'Pilates Instructor'),
+('Sophia Martin', 'Aerobics Instructor'),
+('Mason Thompson', 'Kickboxing Trainer'),
+('Isabella White', 'Dance Fitness Trainer'),
+('Jacob Taylor', 'Senior Fitness Specialist');
+
+INSERT INTO Staff (Name, Role, ContactInfo) VALUES
+('Lucas Clark', 'Receptionist', 'lucas.clark@email.com'),
+('Mia Lewis', 'Facilities Manager', 'mia.lewis@email.com'),
+('Benjamin Robinson', 'Cleaning Staff', 'benjamin.robinson@email.com'),
+('Charlotte Walker', 'Administrative Assistant', 'charlotte.walker@email.com'),
+('James Young', 'General Manager', 'james.young@email.com'),
+('Amelia Hill', 'Marketing Manager', 'amelia.hill@email.com'),
+('Alexander Scott', 'IT Support', 'alexander.scott@email.com'),
+('Evelyn Adams', 'Personal Trainer Coordinator', 'evelyn.adams@email.com'),
+('Logan Nelson', 'Maintenance Worker', 'logan.nelson@email.com'),
+('Harper King', 'Customer Service Representative', 'harper.king@email.com');
+
+INSERT INTO Room (Name, Capacity, Type) VALUES
+('Yoga Studio', 20, 'Yoga'),
+('Pilates Room', 15, 'Pilates'),
+('Spinning Room', 25, 'Cycling'),
+('Weight Room', 30, 'Weight Training'),
+('Cardio Room', 30, 'Cardiovascular'),
+('Aerobics Room', 20, 'Aerobics'),
+('Dance Studio', 20, 'Dance'),
+('Kickboxing Studio', 15, 'Kickboxing'),
+('Personal Training Room', 10, 'Personal Training'),
+('Meditation Room', 15, 'Meditation');
+
+INSERT INTO GroupClasses (Name, TrainerID, RoomID, Schedule, MaxCapacity) VALUES
+('Morning Yoga', 5, 1, 'Everyday 6:00 AM - 7:00 AM', 20),
+('Power Pilates', 6, 2, 'Mon, Wed, Fri 10:00 AM - 11:00 AM', 15),
+('High-Intensity Cycling', 3, 3, 'Tue, Thu 5:00 PM - 6:00 PM', 25),
+('Bodybuilding 101', 2, 4, 'Everyday 7:00 PM - 8:00 PM', 30),
+('Cardio Blast', 4, 5, 'Mon to Fri 6:00 PM - 7:00 PM', 30),
+('Zumba Dance', 9, 7, 'Sat, Sun 10:00 AM - 11:00 AM', 20),
+('Kickboxing Basics', 8, 8, 'Tue, Thu 7:00 PM - 8:00 PM', 15),
+('Personal Fitness Session', 7, 9, 'On Appointment', 1),
+('Mindful Meditation', 5, 10, 'Sun 8:00 AM - 9:00 AM', 15),
+('Aerobic Fitness', 7, 6, 'Mon, Wed, Fri 8:00 AM - 9:00 AM', 20);
+
+INSERT INTO Equipment (Type, Status, LastMaintenanceDate) VALUES
+('Treadmill', 'Good', '2023-11-01'),
+('Exercise Bike', 'Good', '2023-10-20'),
+('Rowing Machine', 'Good', '2023-10-05'),
+('Elliptical', 'Needs Repair', '2023-09-15'),
+('Stair Climber', 'Good', '2023-11-10'),
+('Dumbbells Set', 'Good', '2023-09-25'),
+('Weight Bench', 'Good', '2023-08-30'),
+('Kettlebells', 'Good', '2023-10-10'),
+('Resistance Bands', 'Good', '2023-11-05'),
+('Yoga Mats', 'Good', '2023-10-15');
+
+INSERT INTO Event (Name, Description, DateTime, Location) VALUES
+('Summer Fitness Challenge', 'A month-long fitness challenge with various activities.', '2023-07-01 08:00:00', 'Club Grounds'),
+('Yoga Retreat Weekend', 'A relaxing weekend of yoga and meditation.', '2023-08-20 09:00:00', 'Mountain Retreat Center'),
+('Health and Wellness Seminar', 'Seminar on nutrition, mental health, and physical well-being.', '2023-09-15 17:00:00', 'Conference Room A'),
+('Dance-A-Thon', 'A fun-filled dance marathon for all skill levels.', '2023-10-05 19:00:00', 'Main Hall'),
+('Kids Fitness Camp', 'A week-long fitness camp for children ages 8-12.', '2023-06-15 09:00:00', 'Outdoor Area'),
+('Senior Fitness Day', 'Fitness activities specially designed for seniors.', '2023-11-18 10:00:00', 'Club Grounds'),
+('Pilates Workshop', 'Advanced Pilates techniques and practices.', '2023-12-01 10:00:00', 'Pilates Room'),
+('Cycling Marathon', 'Indoor cycling marathon for experienced cyclists.', '2023-07-22 06:00:00', 'Spinning Room'),
+('Weightlifting Workshop', 'Learn proper techniques and routines in weightlifting.', '2023-08-08 18:00:00', 'Weight Room'),
+('Mindfulness and Meditation', 'Sessions on mindfulness practices and stress management.', '2023-09-30 08:00:00', 'Meditation Room');
