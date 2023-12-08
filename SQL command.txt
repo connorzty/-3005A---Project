@@ -1,3 +1,4 @@
+//insert 10 member record
 INSERT INTO Members (Name, DateOfBirth, Gender, ContactInfo, HealthMetrics, FitnessGoals) VALUES
 ('John Doe', '1985-07-12', 'Male', 'john.doe@email.com', 'Height: 180cm, Weight: 80kg', 'Lose weight'),
 ('Jane Smith', '1990-11-23', 'Female', 'jane.smith@email.com', 'Height: 165cm, Weight: 60kg', 'Build muscle'),
@@ -10,7 +11,7 @@ INSERT INTO Members (Name, DateOfBirth, Gender, ContactInfo, HealthMetrics, Fitn
 ('Grace Hall', '1978-03-21', 'Female', 'grace.hall@email.com', 'Height: 168cm, Weight: 58kg', 'Weight loss'),
 ('Henry Adams', '1983-06-09', 'Male', 'henry.adams@email.com', 'Height: 172cm, Weight: 70kg', 'Endurance training');
 
-
+//insert 10 trainers record
 INSERT INTO Trainers (Name, Qualifications) VALUES
 ('Emma Wilson', 'Certified Personal Trainer'),
 ('Liam Miller', 'Fitness Nutrition Specialist'),
@@ -23,6 +24,7 @@ INSERT INTO Trainers (Name, Qualifications) VALUES
 ('Isabella White', 'Dance Fitness Trainer'),
 ('Jacob Taylor', 'Senior Fitness Specialist');
 
+//insert 10 staff record
 INSERT INTO Staff (Name, Role, ContactInfo) VALUES
 ('Lucas Clark', 'Receptionist', 'lucas.clark@email.com'),
 ('Mia Lewis', 'Facilities Manager', 'mia.lewis@email.com'),
@@ -35,6 +37,7 @@ INSERT INTO Staff (Name, Role, ContactInfo) VALUES
 ('Logan Nelson', 'Maintenance Worker', 'logan.nelson@email.com'),
 ('Harper King', 'Customer Service Representative', 'harper.king@email.com');
 
+//insert 10 room record
 INSERT INTO Room (Name, Capacity, Type) VALUES
 ('Yoga Studio', 20, 'Yoga'),
 ('Pilates Room', 15, 'Pilates'),
@@ -47,6 +50,7 @@ INSERT INTO Room (Name, Capacity, Type) VALUES
 ('Personal Training Room', 10, 'Personal Training'),
 ('Meditation Room', 15, 'Meditation');
 
+//insert 10 groupclass record
 INSERT INTO GroupClasses (Name, TrainerID, RoomID, Schedule, MaxCapacity) VALUES
 ('Morning Yoga', 5, 1, 'Everyday 6:00 AM - 7:00 AM', 20),
 ('Power Pilates', 6, 2, 'Mon, Wed, Fri 10:00 AM - 11:00 AM', 15),
@@ -59,6 +63,7 @@ INSERT INTO GroupClasses (Name, TrainerID, RoomID, Schedule, MaxCapacity) VALUES
 ('Mindful Meditation', 5, 10, 'Sun 8:00 AM - 9:00 AM', 15),
 ('Aerobic Fitness', 7, 6, 'Mon, Wed, Fri 8:00 AM - 9:00 AM', 20);
 
+//insert 10 Equipment record
 INSERT INTO Equipment (Type, Status, LastMaintenanceDate) VALUES
 ('Treadmill', 'Good', '2023-11-01'),
 ('Exercise Bike', 'Good', '2023-10-20'),
@@ -71,6 +76,7 @@ INSERT INTO Equipment (Type, Status, LastMaintenanceDate) VALUES
 ('Resistance Bands', 'Good', '2023-11-05'),
 ('Yoga Mats', 'Good', '2023-10-15');
 
+//insert 10 event record
 INSERT INTO Event (Name, Description, DateTime, Location) VALUES
 ('Summer Fitness Challenge', 'A month-long fitness challenge with various activities.', '2023-07-01 08:00:00', 'Club Grounds'),
 ('Yoga Retreat Weekend', 'A relaxing weekend of yoga and meditation.', '2023-08-20 09:00:00', 'Mountain Retreat Center'),
@@ -82,3 +88,40 @@ INSERT INTO Event (Name, Description, DateTime, Location) VALUES
 ('Cycling Marathon', 'Indoor cycling marathon for experienced cyclists.', '2023-07-22 06:00:00', 'Spinning Room'),
 ('Weightlifting Workshop', 'Learn proper techniques and routines in weightlifting.', '2023-08-08 18:00:00', 'Weight Room'),
 ('Mindfulness and Meditation', 'Sessions on mindfulness practices and stress management.', '2023-09-30 08:00:00', 'Meditation Room');
+
+//add 3 one to one class to table
+INSERT INTO OneToOneClasses (TrainerID, MemberID, DateTime, Description) VALUES
+(1, 1, '2023-12-05 09:00:00', 'Personal Cardio Session'),
+(2, 1, '2023-12-12 10:00:00', 'Strength Training'),
+(3, 1, '2023-12-19 11:00:00', 'Flexibility and Stretching');
+
+//print all the one to one class that member with id 1 attend
+SELECT ClassID, TrainerID, MemberID, DateTime, Description
+FROM OneToOneClasses
+WHERE MemberID = 1;
+
+//add some record of participation of group class
+INSERT INTO MemberClassParticipation (MemberID, ClassID, DateJoined) VALUES
+(1, 1, '2023-01-05'),  
+(1, 2, '2023-01-07'),  
+(1, 3, '2023-01-09'),  
+(2, 1, '2023-01-06'),  
+(2, 2, '2023-01-08'),  
+(2, 4, '2023-01-10');  
+
+//print all the group class info that member1 has attended
+SELECT gc.ClassID, gc.Name, gc.Schedule, gc.MaxCapacity
+FROM GroupClasses gc
+JOIN MemberClassParticipation mcp ON gc.ClassID = mcp.ClassID
+WHERE mcp.MemberID = 1;
+
+//update member's detail
+UPDATE Members
+SET ContactInfo = 'alice.newemail@email.com', HealthMetrics = 'Height: 168cm, Weight: 58kg'
+WHERE MemberID = 1;
+
+//list all the upcomeing event
+SELECT Name, DateTime, Location
+FROM Event
+WHERE DateTime > CURRENT_DATE;
+
