@@ -87,18 +87,14 @@ INSERT INTO Event (Name, Description, DateTime, Location) VALUES
 ('Pilates Workshop', 'Advanced Pilates techniques and practices.', '2023-12-01 10:00:00', 'Pilates Room'),
 ('Cycling Marathon', 'Indoor cycling marathon for experienced cyclists.', '2023-07-22 06:00:00', 'Spinning Room'),
 ('Weightlifting Workshop', 'Learn proper techniques and routines in weightlifting.', '2023-08-08 18:00:00', 'Weight Room'),
-('Mindfulness and Meditation', 'Sessions on mindfulness practices and stress management.', '2023-09-30 08:00:00', 'Meditation Room');
+('Mindfulness and Meditation', 'Sessions on mindfulness practices and stress management.', '2023-09-30 08:00:00', 'Meditation Room'),
+('Boxing', 'Boxing training.', '2023-12-25 08:00:00', 'Boxing Room');
 
 //add 3 one to one class to table
 INSERT INTO OneToOneClasses (TrainerID, MemberID, DateTime, Description) VALUES
 (1, 1, '2023-12-05 09:00:00', 'Personal Cardio Session'),
 (2, 1, '2023-12-12 10:00:00', 'Strength Training'),
 (3, 1, '2023-12-19 11:00:00', 'Flexibility and Stretching');
-
-//print all the one to one class that member with id 1 attend
-SELECT ClassID, TrainerID, MemberID, DateTime, Description
-FROM OneToOneClasses
-WHERE MemberID = 1;
 
 //add some record of participation of group class
 INSERT INTO MemberClassParticipation (MemberID, ClassID, DateJoined) VALUES
@@ -108,6 +104,11 @@ INSERT INTO MemberClassParticipation (MemberID, ClassID, DateJoined) VALUES
 (2, 1, '2023-01-06'),  
 (2, 2, '2023-01-08'),  
 (2, 4, '2023-01-10');  
+
+//print all the one to one class that member with id 1 attend
+SELECT ClassID, TrainerID, MemberID, DateTime, Description
+FROM OneToOneClasses
+WHERE MemberID = 1;
 
 //print all the group class info that member1 has attended
 SELECT gc.ClassID, gc.Name, gc.Schedule, gc.MaxCapacity

@@ -1,4 +1,4 @@
--- Health and Fitness Club Management System Schema
+
 
 -- Members Table
 CREATE TABLE Members (
